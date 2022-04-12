@@ -21,14 +21,20 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_20D25F84: 1
-    - Vector1_23CE9A66: 0.27
+    - Vector1_20D25F84: 1.3
+    - Vector1_23CE9A66: 0.52
     - Vector1_B912C22B: 1.47
-    - Vector1_DF0BA461: 0.72
-    - Vector1_F4C316EA: 118.07
+    - Vector1_DF0BA461: 0.92
+    - Vector1_F4C316EA: 31.52
+    - points_mult: 1
     m_Colors:
     - Color_3404951C: {r: 0.92156863, g: 0.6862745, b: 0.22745098, a: 0}
     - Color_9029B7B5: {r: 0.1254902, g: 0.08235294, b: 0.07058824, a: 0}
     - Color_919156FE: {r: 0.4745098, g: 0.6745098, b: 0.30588236, a: 0}
     - Vector3_5C65472B: {r: -0.3, g: 0, b: 0, a: 0}
     - Vector3_ED585B96: {r: 0.39, g: 0, b: 0, a: 0}
+    - col_centre: {r: 0.9811321, g: 0.02313991, b: 0.02313991, a: 0}
+    - col_fond: {r: 0.34405467, g: 1, b: 0, a: 0}
+    - col_points: {r: 0, g: 0.22087547, b: 1, a: 0}
+    - piedD: {r: 0, g: 0, b: 0, a: 0}
+    - piedG: {r: -1.96, g: 0, b: 0, a: 0}
