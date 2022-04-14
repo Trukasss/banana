@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class script_GameMaster : MonoBehaviour
@@ -11,6 +12,7 @@ public class script_GameMaster : MonoBehaviour
     public TextMeshProUGUI txt_score;
     public script_Vie_CTRL vies_CTRL;
     public script_DanceFloor_CTRL danceFloors_CTRL;
+    public shooting gunner;
 
     private bool gameover = false;
     private int min, sec, mil; //temps
@@ -23,12 +25,6 @@ public class script_GameMaster : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Degat();
-            print(nb_vies);
-        }
-
         //Score
         if (!gameover)
         {
@@ -39,6 +35,15 @@ public class script_GameMaster : MonoBehaviour
     public void Degat()
     {
         nb_vies -= 1;
+        var liste_bananes = FindObjectsOfType<GameObject>();
+        foreach(GameObject go in liste_bananes)
+        {
+            if(go.layer == 8)
+            {
+                Destroy(go);
+            }
+        }
+
         if (nb_vies > 0)
         {
             StartCoroutine(Ivulnerabilite(1f, true));
@@ -70,9 +75,10 @@ public class script_GameMaster : MonoBehaviour
     private void GameOver()
     {
         gameover = true;
+        PlayerPrefs.SetFloat("currentscore", Time.time);
         float score_sauv = PlayerPrefs.GetFloat("highscore");
-        float score_actu = Time.time;
-        if(score_actu > score_sauv)
+        float score_actu = PlayerPrefs.GetFloat("currentscore");
+        if (score_actu > score_sauv)
         {
             PlayerPrefs.SetFloat("highscore", score_actu);
             AfficherScore();
@@ -82,11 +88,19 @@ public class script_GameMaster : MonoBehaviour
 
     IEnumerator Ivulnerabilite(float seconds, bool reset)
     {
+        gunner.Bloquer();
         danceFloors_CTRL.Off();
         vies_CTRL.Mort_debut(nb_vies);
         yield return new WaitForSeconds(seconds);
         vies_CTRL.Mort_fin(nb_vies);
         if (reset)
+        {
             danceFloors_CTRL.On();
+            gunner.Debloquer();
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

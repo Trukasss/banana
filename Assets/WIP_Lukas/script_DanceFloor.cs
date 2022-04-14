@@ -21,12 +21,20 @@ public class script_DanceFloor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        collision = true;
+        if(other.transform.tag == "Player")
+            collision = true;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.transform.tag == "Player")
+            collision = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        collision = false;
+        if (other.transform.tag == "Player")
+            collision = false;
     }
 
     public void set_taille_points(float taille)

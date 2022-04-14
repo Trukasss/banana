@@ -4,87 +4,56 @@ using UnityEngine;
 
 public class shooting : MonoBehaviour
 {
-
     public GameObject Projectile ;
     public Transform[] Canon_array;
     private Banane current;
     private float sizeBanana=1f;
     Transform firstChild;
-    public float speed = 50f;
+    private AudioSource son;
 
     private bool canFire= true;
     private bool Hold = false;
-    public void Fire_Banana(float index, Banane bananeObject)
-    {
-        bananeObject.Launch();
-        canFire = true;
-    }
-    public Banane Hold_Banana(int index)
-    {
-        if (canFire)
-        {
+    private bool bloque = false;
 
-        }
-        Transform Launcher = Canon_array[index];
-        GameObject banana = Instantiate(Projectile, Launcher.position, Projectile.transform.rotation);
-
-        Banane bananeScript = banana.GetComponent<Banane>();
-        
-        Debug.Log(sizeBanana);
-        
-        sizeBanana = 1f;
-
-        Hold = true;
-        canFire = false;
-        
-        return bananeScript;
-
-    }
     void Start()
     {
         firstChild = GameObject.Find("Gunner").transform.GetChild(0);
-        //Canon_array = GetComponentsInChildren<Transform>();
-        Debug.Log(Canon_array);
-        foreach(Transform child in Canon_array)
-        {
-
-            Debug.Log(child);
-        }
-        
+        son = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
 
-        if (Input.GetKeyUp("left"))
-        {
-            Fire_Banana(0, current);
-        }
-        if (Input.GetKeyUp("right"))
-        {
-            Fire_Banana(1, current);
-        }
 
-        if (Input.GetKeyUp("up"))
+        if (!bloque)
         {
-            Fire_Banana(2, current);
+            if (Input.GetKeyUp("left"))
+            {
+                Fire_Banana(0, current);
+            }
+            if (Input.GetKeyUp("right"))
+            {
+                Fire_Banana(1, current);
+            }
+            if (Input.GetKeyUp("up"))
+            {
+                Fire_Banana(2, current);
+            }
+            if (Input.GetKeyUp("down"))
+            {
+                Fire_Banana(3, current);
+            }
+            if (Input.GetKeyUp("space"))
+            {
+                Fire_Banana(4, current);
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                Fire_Banana(5, current);
+            }
         }
-        if (Input.GetKeyUp("down"))
-        {
-            Fire_Banana(3, current);
-        }
-        if (Input.GetKeyUp("space"))
-        {
-            Fire_Banana(4, current);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Fire_Banana(5, current);
-        }
-
-        if (canFire)
+        if (canFire && !bloque)
         {
             if (Input.GetKeyDown("left"))
             {
@@ -110,20 +79,55 @@ public class shooting : MonoBehaviour
             {
                 current = Hold_Banana(5);
             }
-
         }
 
-       
 
-        if (Hold)
+        if (Hold && current != null)
         {
-            sizeBanana += Time.deltaTime * speed;
-
+            if (!son.isPlaying)
+            {
+                son.Play();
+            }
+            sizeBanana += Time.deltaTime * 150f;
             current.Growth(sizeBanana);
         }
+        else
+        {
+            son.Stop();
+        }
+        //print("canfire : " + canFire.ToString() + ", hold : " + Hold.ToString() + ", bloque : " + bloque.ToString());
+    }
 
+    public Banane Hold_Banana(int index)
+    {
+        Transform Launcher = Canon_array[index];
+        GameObject banana = Instantiate(Projectile, Launcher.position, Projectile.transform.rotation);
 
+        Banane bananeScript = banana.GetComponent<Banane>();
+        
+        sizeBanana = 1f;
+        Hold = true;
+        canFire = false;
 
+        return bananeScript;
+    }
 
+    public void Fire_Banana(float index, Banane bananeObject)
+    {
+        if(bananeObject != null)
+        {
+            bananeObject.Launch();
+        }
+        canFire = true;
+        Hold = false;
+    }
+
+    public void Bloquer()
+    {
+        bloque = true;
+    }
+    public void Debloquer()
+    {
+        bloque = false;
     }
 }
