@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_BANANA_COMMUN/Scenes/1_Banana.unity
     guid: efc503accee5f4741a82dcf8a4950272
+  - enabled: 1
+    path: Assets/_BANANA_COMMUN/Scenes/2_Banana_fin.unity
+    guid: 8e32ab7d030f1c4438d03d5896b58726
   m_configObjects: {}

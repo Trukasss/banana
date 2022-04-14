@@ -10,11 +10,14 @@ public class script_score_fin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float 
-        foreach(TextMeshProUGUI txt_score in textes_score)
-        {
+        float score_actu = PlayerPrefs.GetFloat("currentscore");
+        int mil = (int)(score_actu * 100) % 100;
+        int sec = (int)(score_actu % 60);
+        int min = (int)(score_actu / 60) % 60;
 
-            txt_score.SetText("")
+        foreach (TextMeshProUGUI txt_score in textes_score)
+        {
+            txt_score.SetText(min.ToString() + '"' + sec.ToString() + "'" + mil.ToString());
         }
     }
 
