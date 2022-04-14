@@ -5,19 +5,47 @@ using UnityEngine;
 public class script_DanceFloor : MonoBehaviour
 {
     private Material mat;
-    private bool collision;
+    private bool collision = false;
 
     // Start is called before the first frame update
     void Start()
     {
         mat = this.GetComponent<Renderer>().material;
+        //collision = true;
+    }
+
+    private void Update()
+    {
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         collision = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        collision = false;
+    }
+
+    public void set_taille_points(float taille)
+    {
+        mat.SetFloat("points_mult", taille);
     }
 
     public void set_pieds_coord(Vector3 piedG_pos, Vector3 piedD_pos)
     {
-        mat.SetVector("piedG", piedG_pos);
-        mat.SetVector("piedD", piedD_pos);
+        if (collision)
+        {
+            mat.SetVector("piedG", piedG_pos);
+            mat.SetVector("piedD", piedD_pos);
+        }
+        else
+        {
+            mat.SetVector("piedG", new Vector3(-999, -999, -999));
+            mat.SetVector("piedD", new Vector3(-999, -999, -999));
+        }
     }
 
     public void set_cols(Color centre, Color points, Color fond)
