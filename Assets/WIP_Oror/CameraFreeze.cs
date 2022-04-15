@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraFreeze : MonoBehaviour
 {
     // Update is called once per frame
-    void Awake()
+
+    void Update()
     {
         UnityEngine.XR.XRDevice.DisableAutoXRCameraTracking(Camera.main, true);
     }

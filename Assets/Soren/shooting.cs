@@ -105,8 +105,12 @@ public class shooting : MonoBehaviour
     {
         Transform Launcher = Canon_array[index];
         Projectile = Banane[Random.Range(0, Banane.Length)];
+<<<<<<< HEAD
         canon_particle.transform.position = Launcher.transform.position;
         GameObject banana = Instantiate(Projectile, Launcher.position, Launcher.rotation);
+=======
+        GameObject banana = Instantiate(Projectile, Launcher.position, Projectile.transform.rotation);
+>>>>>>> 11918d5b760bbbceec6ce259c8509175b77e5418
 
         Banane bananeScript = banana.GetComponent<Banane>();
 
