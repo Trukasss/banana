@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class shooting : MonoBehaviour
 {
-    public GameObject Projectile ;
+    public GameObject Projectile;
     public Transform[] Canon_array;
     private Banane current;
-    private float sizeBanana=1f;
+    private float sizeBanana = 1f;
     Transform firstChild;
     private AudioSource son;
+    public GameObject[] Banane;
 
-    private bool canFire= true;
+    public ParticleSystem canon_particle;
+
+    private bool canFire = true;
     private bool Hold = false;
     private bool bloque = false;
 
@@ -101,10 +104,11 @@ public class shooting : MonoBehaviour
     public Banane Hold_Banana(int index)
     {
         Transform Launcher = Canon_array[index];
+        Projectile = Banane[Random.Range(0, Banane.Length)];
         GameObject banana = Instantiate(Projectile, Launcher.position, Projectile.transform.rotation);
 
         Banane bananeScript = banana.GetComponent<Banane>();
-        
+
         sizeBanana = 1f;
         Hold = true;
         canFire = false;
@@ -114,9 +118,10 @@ public class shooting : MonoBehaviour
 
     public void Fire_Banana(float index, Banane bananeObject)
     {
-        if(bananeObject != null)
+        if (bananeObject != null)
         {
             bananeObject.Launch();
+            canon_particle.Play();
         }
         canFire = true;
         Hold = false;
