@@ -62,7 +62,7 @@ public class Banane : MonoBehaviour
     {
         if (canLaunch)
         {
-            rb.velocity = new Vector3(0, 0, Speed_Time);
+            rb.velocity = new Vector3(-Speed_Time, 0, 0);
 
         }
     }
