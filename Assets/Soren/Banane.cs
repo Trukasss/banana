@@ -17,6 +17,9 @@ public class Banane : MonoBehaviour
 
     public Vector3 scaleChange = new Vector3(0.1f,0,0);
 
+    public Material material_tete;
+    public Texture2D[] textures_visage;
+
     public void Growth(float sizeBanana)
     {
         middle_banane.localScale = new Vector3(2 +sizeBanana,2,2);
@@ -25,9 +28,12 @@ public class Banane : MonoBehaviour
     
     void Start()
     {
+        //texture visage
+        Texture2D visage = textures_visage[Random.Range(0, textures_visage.Length)];
+        material_tete.SetTexture("visage", visage);
+
         rb = GetComponent<Rigidbody>();
         Speed_Time = Speed;
-
     }
 
     void OnBecameInvisible()
