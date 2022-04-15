@@ -8,17 +8,16 @@ public class Banane : MonoBehaviour
     public float Speed=0f;
     private float Speed_Time;
     private bool canLaunch = false;
+    public Vector3 scaleChange = new Vector3(0.1f, 0, 0);
 
     public Transform top_banane;
     public Transform middle_banane;
     public Transform bot_banane;
-
     public Transform end_Banane;
 
-    public Vector3 scaleChange = new Vector3(0.1f,0,0);
-
-    public Material material_tete;
+    //Textures
     public Texture2D[] textures_visage;
+    public Texture2D[] textures_corps;
 
     public void Growth(float sizeBanana)
     {
@@ -28,9 +27,22 @@ public class Banane : MonoBehaviour
     
     void Start()
     {
-        //texture visage
+        //Textures random
         Texture2D visage = textures_visage[Random.Range(0, textures_visage.Length)];
-        material_tete.SetTexture("visage", visage);
+        Texture2D corps = textures_corps[Random.Range(0, textures_corps.Length)];
+        Material material = top_banane.GetChild(0).GetComponent<Renderer>().material;
+        material.SetTexture("visage", visage);
+        material.SetTexture("corps", corps);
+        material.SetFloat("alpha", 1f);
+        material = middle_banane.GetChild(0).GetComponent<Renderer>().material;
+        material.SetTexture("visage", visage);
+        material.SetTexture("corps", corps);
+        material.SetFloat("alpha", 0f);
+        material = bot_banane.GetChild(0).GetComponent<Renderer>().material;
+        material.SetTexture("visage", visage);
+        material.SetTexture("corps", corps);
+        material.SetFloat("alpha", 0f);
+
 
         rb = GetComponent<Rigidbody>();
         Speed_Time = Speed;
