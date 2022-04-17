@@ -91,7 +91,7 @@ public class shooting : MonoBehaviour
             {
                 son.Play();
             }
-            sizeBanana += Time.deltaTime * 150f;
+            sizeBanana += Time.deltaTime * 80f;
             current.Growth(sizeBanana);
         }
         else
@@ -105,7 +105,9 @@ public class shooting : MonoBehaviour
     {
         Transform Launcher = Canon_array[index];
         Projectile = Banane[Random.Range(0, Banane.Length)];
-        GameObject banana = Instantiate(Projectile, Launcher.position, Projectile.transform.rotation);
+        canon_particle.transform.position = Launcher.transform.position;
+        Debug.Log(canon_particle.transform.position);
+        GameObject banana = Instantiate(Projectile, Launcher.position, Launcher.rotation);
 
         Banane bananeScript = banana.GetComponent<Banane>();
 

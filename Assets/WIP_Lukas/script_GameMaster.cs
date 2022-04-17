@@ -15,16 +15,20 @@ public class script_GameMaster : MonoBehaviour
     public shooting gunner;
 
     private bool gameover = false;
+    private float temps = 0f;
     private int min, sec, mil; //temps
     private int nb_vies = 3;
 
     void Start()
     {
+        //PlayerPrefs.DeleteAll();
+        temps = 0f;
         AfficherScore();
     }
 
     void Update()
     {
+        temps += Time.deltaTime;
         //Score
         if (!gameover)
         {
@@ -66,16 +70,16 @@ public class script_GameMaster : MonoBehaviour
 
     private void AfficherTemps()
     {
-        mil = (int)(Time.time * 100) % 100;
-        sec = (int)(Time.time % 60);
-        min = (int)(Time.time / 60) % 60;
+        mil = (int)(temps * 100) % 100;
+        sec = (int)(temps % 60);
+        min = (int)(temps / 60) % 60;
         txt_temps.SetText(min.ToString() + '"' + sec.ToString() + "'" + mil.ToString());
     }
 
     private void GameOver()
     {
         gameover = true;
-        PlayerPrefs.SetFloat("currentscore", Time.time);
+        PlayerPrefs.SetFloat("currentscore", temps);
         float score_sauv = PlayerPrefs.GetFloat("highscore");
         float score_actu = PlayerPrefs.GetFloat("currentscore");
         if (score_actu > score_sauv)

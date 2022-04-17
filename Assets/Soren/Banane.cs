@@ -5,7 +5,7 @@ using UnityEngine;
 public class Banane : MonoBehaviour
 {
     public Rigidbody rb;
-    public float Speed=0f;
+    private float Speed=2f;
     private float Speed_Time;
     private bool canLaunch = false;
     public Vector3 scaleChange = new Vector3(0.1f, 0, 0);
@@ -22,11 +22,14 @@ public class Banane : MonoBehaviour
     public void Growth(float sizeBanana)
     {
         middle_banane.localScale = new Vector3(2 +sizeBanana,2,2);
-        top_banane.transform.position = end_Banane.position; 
+        top_banane.transform.position = end_Banane.position;
+        
     }
     
     void Start()
     {
+
+        
         //Textures random
         Texture2D visage = textures_visage[Random.Range(0, textures_visage.Length)];
         Texture2D corps = textures_corps[Random.Range(0, textures_corps.Length)];
@@ -62,7 +65,7 @@ public class Banane : MonoBehaviour
     {
         if (canLaunch)
         {
-            rb.velocity = new Vector3(0, 0, Speed_Time);
+            rb.velocity = new Vector3(-Speed_Time, 0, 0);
 
         }
     }
