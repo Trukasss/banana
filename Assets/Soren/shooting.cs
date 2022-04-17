@@ -91,7 +91,11 @@ public class shooting : MonoBehaviour
             {
                 son.Play();
             }
+<<<<<<< HEAD
             sizeBanana += Time.deltaTime * 80f;
+=======
+            sizeBanana += Time.deltaTime * 25f;
+>>>>>>> acbbb1e357781e750ae70d164816558336751a26
             current.Growth(sizeBanana);
         }
         else
@@ -105,9 +109,18 @@ public class shooting : MonoBehaviour
     {
         Transform Launcher = Canon_array[index];
         Projectile = Banane[Random.Range(0, Banane.Length)];
+<<<<<<< HEAD
         canon_particle.transform.position = Launcher.transform.position;
         Debug.Log(canon_particle.transform.position);
         GameObject banana = Instantiate(Projectile, Launcher.position, Launcher.rotation);
+=======
+<<<<<<< HEAD
+        canon_particle.transform.position = Launcher.transform.position;
+        GameObject banana = Instantiate(Projectile, Launcher.position, Launcher.rotation);
+=======
+        GameObject banana = Instantiate(Projectile, Launcher.position, Projectile.transform.rotation);
+>>>>>>> 11918d5b760bbbceec6ce259c8509175b77e5418
+>>>>>>> acbbb1e357781e750ae70d164816558336751a26
 
         Banane bananeScript = banana.GetComponent<Banane>();
 
